@@ -1,0 +1,18 @@
+.header {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  max-width: 320px;
+  width: 100%;
+  background-color: #fff;
+}
+
+.header__logo {
+  margin: 0;
+  padding: 0;
+  max-width: 38px;
+  width: 100%;
+  min-height: 38px;
+  background: url(../../images/header-logo.svg);
+}
