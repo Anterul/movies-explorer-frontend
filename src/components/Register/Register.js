@@ -53,6 +53,7 @@ function Register(props) {
           id="email"
           required
         />
+
         <input
           className="register__input"
           value={password}
