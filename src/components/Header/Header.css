@@ -1,6 +1,7 @@
 .header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   margin: 0;
   padding: 0;
   max-width: 320px;
@@ -8,11 +9,194 @@
   background-color: #fff;
 }
 
-.header__logo {
+.header__auth-link-container {
   margin: 0;
+  padding: 24px 14px 24px 0;
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(2, auto);
+  grid-template-rows: auto;
+  column-gap: 14px;
+}
+
+.header__auth-link {
+  margin: 0;
+  padding: 0;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 16px;
+  text-decoration: none;
+  color: #000;
+  transition: opacity 0.3s;
+}
+
+.header__auth-link:hover {
+  opacity: 0.85;
+}
+
+.header__signin-button {
+  margin: 0;
+  padding: 0;
+  width: 54px;
+  height: 26px;
+  border: none;
+  border-radius: 3px;
+  background: #2be080;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.header__signin-button:hover {
+  opacity: 0.85;
+}
+
+.header__logo {
+  margin: 18px 0 18px 14px;
   padding: 0;
   max-width: 38px;
   width: 100%;
   min-height: 38px;
   background: url(../../images/header-logo.svg);
+  background-repeat: no-repeat;
+}
+
+.header__menu {
+  margin: 15px 14px 16px 0;
+  padding: 0;
+  max-width: 40px;
+  width: 100%;
+  min-height: 43px;
+  border: none;
+  background: url(../../images/header-menu.svg);
+  background-repeat: no-repeat;
+}
+
+.header__menu-container {
+  position: relative;
+  display: flex;
+  padding: 0 70px 0 44px;
+  width: 100%;
+  min-height: 32px;
+}
+
+.header__films-link-container {
+  display: flex;
+  align-items: center;
+}
+
+.header__movies-link {
+  margin: 0;
+  padding: 0 16px 0 0;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+  color: #000;
+  transition: opacity 0.3s;
+}
+
+.header__movies-link:hover {
+  opacity: 0.85;
+}
+
+.header__saved-movies-link {
+  margin: 0;
+  padding: 0;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+  text-decoration: none;
+  color: #000;
+  transition: opacity 0.3s;
+}
+
+.header__saved-movies-link:hover {
+  opacity: 0.85;
+}
+
+.header__profile-button {
+  position: absolute;
+  top: 0px;
+  right: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  max-width: 100px;
+  border: none;
+  background-color: #fff;
+  border-radius: 16px;
+  box-shadow: 0 3px 10px 5px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.header__profile-button:hover {
+  opacity: 0.85;
+}
+
+.header__account-text {
+  margin: 0;
+  padding: 9.5px 0 9.5px 11px;
+  font-size: 13px;
+  line-height: 12px;
+  font-weight: 500;
+  text-align: center;
+  color: #000;
+}
+
+.header__account-icon {
+  margin: 3px;
+  padding: 0;
+  max-width: 26px;
+  width: 100%;
+  height: 26px;
+  border-radius: 50%;
+  background: url(../../images/account-icon.svg);
+  background-color: #f9f9f9;
+  background-repeat: no-repeat;
+  background-size: 10px 10px;
+  background-position: center center;
+}
+
+@media screen and (min-width: 768px) {
+  .header {
+    max-width: 768px;
+  }
+
+  .header__logo {
+    margin-left: 30px;
+  }
+
+  .header__auth-link-container {
+    padding: 21px 30px 21px 0;
+    column-gap: 30px;
+  }
+
+  .header__auth-link {
+    font-size: 12px;
+  }
+
+  .header__signin-button {
+    width: 76px;
+    height: 32px;
+  }
+
+  .header__menu {
+    margin-right: 30px;
+    max-width: 44px;
+    min-height: 44px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .header {
+    max-width: 1280px;
+  }
+
+  .header__auth-link-container {
+    padding-right: 70px;
+  }
 }
