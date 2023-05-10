@@ -42,7 +42,9 @@ function Header({ isLoggedIn, onMenuClick }) {
                 </Link>
               </div>
               <button className="header__profile-button" type="button">
-                <p className="header__account-text">Аккаунт</p>
+                <Link className="header__account-text" to="/profile">
+                  Аккаунт
+                </Link>
                 <div className="header__account-icon"></div>
               </button>
             </div>

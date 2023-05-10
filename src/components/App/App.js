@@ -7,6 +7,7 @@ import Register from "../Register/Register";
 import Login from "../Login/Login";
 import ResultNotFound from "../ResultNotFound/ResultNotFound";
 import MenuPopup from "../MenuPopup/MenuPopup";
+import Profile from "../Profile/Profile";
 // contexts
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 // react tools
@@ -20,15 +21,15 @@ function App() {
   }
 
   const [currentUser, setCurrentUser] = useState({
-    userName: "",
-    userEmail: "",
-    _id: "",
+    name: "Name", // временно Name, вернуть ""
+    email: "aa@aa.ru",
   });
 
   const [isMenuPopupOpen, setIsMenuPopupOpen] = useState(false);
   function handleIsMenuPopupOpen() {
     setIsMenuPopupOpen(true);
   }
+
   function closeAllPopups() {
     setIsMenuPopupOpen(false);
   }
@@ -40,15 +41,30 @@ function App() {
           <Route
             path="/"
             element={
-              <Header
-                isLoggedIn={isLoggedIn}
-                onMenuClick={handleIsMenuPopupOpen}
-              />
+              <>
+                <Header
+                  isLoggedIn={isLoggedIn}
+                  onMenuClick={handleIsMenuPopupOpen}
+                />
+                <Footer />
+              </>
             }
           />
-          <Route path="/" element={<Footer />} />
+
           <Route path="/signup" element={<Register />} />
           <Route path="/signin" element={<Login />} />
+          <Route
+            path="/profile"
+            element={
+              <>
+                <Header
+                  isLoggedIn={isLoggedIn}
+                  onMenuClick={handleIsMenuPopupOpen}
+                />
+                <Profile />
+              </>
+            }
+          />
           <Route path="*" element={<ResultNotFound />} />
         </Routes>
         <MenuPopup
