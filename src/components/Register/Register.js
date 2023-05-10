@@ -32,9 +32,22 @@ function Register(props) {
           <label className="register__label">Имя</label>
           <input
             className="register__input"
+            value={name}
+            onChange={handleNameChange}
+            type="name"
+            name="name"
+            id="name"
+            required
+          />
+          <span className="register__error-message"></span>
+        </div>
+
+        <div className="register__input-container">
+          <label className="register__label">E-mail</label>
+          <input
+            className="register__input"
             value={email}
             onChange={handleEmailChange}
-            placeholder="Email"
             type="email"
             name="email"
             id="email"
@@ -42,35 +55,31 @@ function Register(props) {
           />
           <span className="register__error-message"></span>
         </div>
-
-        <input
-          className="register__input"
-          value={email}
-          onChange={handleEmailChange}
-          placeholder="Email"
-          type="email"
-          name="email"
-          id="email"
-          required
-        />
-
-        <input
-          className="register__input"
-          value={password}
-          onChange={handlePasswordChange}
-          placeholder="Пароль"
-          type="password"
-          name="password"
-          id="password"
-          required
-        />
+        <div className="register__input-container">
+          <label className="register__label">Пароль</label>
+          <input
+            className="register__input"
+            value={password}
+            onChange={handlePasswordChange}
+            type="password"
+            name="password"
+            id="password"
+            required
+          />
+          <span className="register__error-message">
+            Что-то пошло не так...
+          </span>
+        </div>
         <button className="register__submit-button" type="submit">
           Зарегистрироваться
         </button>
       </form>
-      <NavLink className="register__link" to="/signin">
-        Уже зарегистрированы? Войти
-      </NavLink>
+      <p className="register__link-text">
+        Уже зарегистрированы?
+        <NavLink className="register__link" to="/signin">
+          Войти
+        </NavLink>
+      </p>
     </div>
   );
 }

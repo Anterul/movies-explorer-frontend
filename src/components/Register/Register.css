@@ -26,15 +26,19 @@
 }
 
 .register__form {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
 }
 
 .register__input-container {
   display: flex;
   flex-direction: column;
+  margin: 0 0 10px 0;
 }
 
 .register__label {
-  margin: 0 0 10px;
+  margin: 0 0 10px 0;
   padding: 0;
   font-size: 10px;
   font-weight: 400;
@@ -44,8 +48,8 @@
 
 .register__input {
   margin: 0;
-  padding: 0;
-  width: 260px;
+  padding: 0 0 0 15px;
+  width: 245px;
   height: 46px;
   font-size: 13px;
   font-weight: 400;
@@ -59,6 +63,7 @@
 .register__error-message {
   margin: 10px 0 0 0;
   padding: 0;
+  height: 12px;
   font-size: 10px;
   font-weight: 400;
   line-height: 12px;
@@ -66,17 +71,99 @@
 }
 
 .register__submit-button {
-  margin: 157px 0 0 0;
+  margin: 147px 0 0 0;
   padding: 0;
   width: 260px;
   height: 45px;
   font-size: 12px;
   font-weight: 400;
   line-height: 15px;
+  color: #ffffff;
   border: none;
   border-radius: 3px;
   background-color: #ff6838;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.register__submit-button:hover {
+  opacity: 0.85;
+}
+
+.register__link-text {
+  margin: 14px 0 0 0;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  color: #a0a0a0;
 }
 
 .register__link {
+  margin: 0;
+  padding: 0 0 0 7px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  text-decoration: none;
+  color: #ff6838;
+  transition: opacity 0.3s;
+}
+
+.register__link:hover {
+  opacity: 0.85;
+}
+
+@media screen and (min-width: 768px) {
+  .register {
+    max-width: 768px;
+  }
+
+  .register__logo {
+    align-self: flex-start;
+    margin: 232px 0 0 186px;
+  }
+
+  .register__title {
+    align-self: flex-start;
+    margin: 40px 0 40px 186px;
+  }
+
+  .register__input {
+    width: 381px;
+    line-height: 16px;
+  }
+
+  .register__submit-button {
+    margin-top: 69px;
+    width: 396px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .register__link-text {
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .register__link {
+    padding-left: 6px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .register {
+    max-width: 1280px;
+  }
+
+  .register__logo {
+    margin: 70px 0 0 442px;
+  }
+
+  .register__title {
+    margin: 40px 0 40px 442px;
+  }
 }

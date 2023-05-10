@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
-function Header({ isLoggedIn }) {
+function Header({ isLoggedIn, onMenuClick }) {
   const [width, setWidth] = useState(window.innerWidth);
   function hadleScreenWidth() {
     setWidth(window.innerWidth);
@@ -47,7 +47,11 @@ function Header({ isLoggedIn }) {
               </button>
             </div>
           ) : (
-            <button className="header__menu" type="button"></button>
+            <button
+              className="header__menu"
+              type="button"
+              onClick={onMenuClick}
+            ></button>
           )}
         </header>
       )}
