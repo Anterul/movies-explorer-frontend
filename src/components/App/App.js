@@ -8,6 +8,7 @@ import Login from "../Login/Login";
 import ResultNotFound from "../ResultNotFound/ResultNotFound";
 import MenuPopup from "../MenuPopup/MenuPopup";
 import Profile from "../Profile/Profile";
+import Main from "../Main/Main";
 // contexts
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 // react tools
@@ -15,7 +16,7 @@ import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // ! вернуть false после разработки
+  const [isLoggedIn, setIsLoggedIn] = useState(true); // ! вернуть false после разработки
   function handleIsLoggedIn() {
     setIsLoggedIn(true);
   }
@@ -46,6 +47,7 @@ function App() {
                   isLoggedIn={isLoggedIn}
                   onMenuClick={handleIsMenuPopupOpen}
                 />
+                <Main />
                 <Footer />
               </>
             }
