@@ -1,11 +1,16 @@
 import Promo from "./Promo/Promo";
+import AboutProject from "./AboutProject/AboutProject";
+import Techs from "./Techs/Techs";
+import AboutMe from "./AboutMe/AboutMe";
 
 function Main() {
-  // лого хедера сдвиг слева поправить на разрешениях 768 и 1280
   return (
-    <div className="main">
+    <section className="main">
       <Promo />
-    </div>
+      <AboutProject />
+      <Techs />
+      <AboutMe />
+    </section>
   );
 }
 

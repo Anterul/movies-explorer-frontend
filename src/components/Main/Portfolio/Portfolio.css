@@ -1,0 +1,130 @@
+.portfolio {
+  margin: 0;
+  max-width: 320px;
+}
+
+.portfolio__title {
+  margin: 70px 14px 0;
+  padding: 0;
+  max-width: 292px;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: #a0a0a0;
+}
+
+.portfolio__container {
+  margin: 20px 14px 70px;
+  padding: 0;
+  list-style: none;
+}
+
+.portfolio__link-container {
+  margin: 0;
+  padding: 0;
+}
+
+.portfolio__link {
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.portfolio__link:hover {
+  opacity: 0.85;
+}
+
+.portfolio__text {
+  margin: 0;
+  padding: 20px 0 0;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  letter-spacing: -0.04em;
+  color: #000000;
+}
+
+.portfolio__arrow {
+  margin: 0;
+  padding: 23px 4px 8px;
+  max-width: 13px;
+  width: 100%;
+  height: 20px;
+  object-position: top 0 left 0;
+}
+
+.portfolio__line {
+  margin: 19px 0 0 0;
+  padding: 0;
+  max-width: 292px;
+  border-bottom: 1px solid #e6e6e6;
+}
+
+@media screen and (min-width: 768px) {
+  .portfolio {
+    max-width: 768px;
+  }
+
+  .portfolio__title {
+    margin: 90px 0 0 50px;
+    max-width: 250px;
+    font-size: 18px;
+    line-height: 20px;
+  }
+
+  .portfolio__container {
+    margin: 50px 50px 90px;
+  }
+
+  .portfolio__text {
+    padding: 20px 0 0;
+    font-size: 28px;
+    line-height: 50px;
+  }
+
+  .portfolio__arrow {
+    margin: 0;
+    padding: 23px 6px 8px;
+    max-width: 16px;
+    width: 100%;
+    height: 20px;
+  }
+
+  .portfolio__line {
+    max-width: 668px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .portfolio {
+    max-width: 1280px;
+  }
+
+  .portfolio__title {
+    margin: 100px 0 0 70px;
+  }
+
+  .portfolio__container {
+    margin: 50px 70px 125px;
+  }
+
+  .portfolio__text {
+    padding: 20px 0 0;
+    font-size: 30px;
+  }
+
+  .portfolio__arrow {
+    margin: 0;
+    padding: 23px 6px 8px;
+    max-width: 18px;
+    width: 100%;
+    height: 20px;
+  }
+
+  .portfolio__line {
+    max-width: 1140px;
+  }
+}

@@ -1,0 +1,222 @@
+.about-project {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+  padding: 0;
+  max-width: 320px;
+  width: 100%;
+  background-color: #fff;
+}
+
+.about-project__title {
+  margin: 70px 0 0 18px;
+  padding: 0;
+  max-width: 284px;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: -0.04em;
+  color: #000;
+}
+
+.about-project__title_in-container:nth-of-type(1) {
+  margin-top: 60px;
+}
+
+.about-project__title_in-container:nth-of-type(2) {
+  margin-top: 56px;
+}
+
+.about-project__line {
+  margin: 28px 0 0 18px;
+  padding: 0;
+  max-width: 284px;
+  border-bottom: 1px solid #000;
+}
+
+.about-project__container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(4, auto);
+}
+
+.about-project__description {
+  margin: 16px 0 0 18px;
+  padding: 0;
+  max-width: 284px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 16px;
+  color: #000;
+}
+
+.about-project__weeks-container {
+  display: flex;
+  justify-content: center;
+  margin: 60px 0 70px 0;
+  max-width: 320px;
+}
+
+.about-project__web-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-project__weeks-text {
+  margin: 10px 0 0 0;
+  padding: 0;
+  max-height: 13px;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  text-align: center;
+  color: #a0a0a0;
+}
+
+.about-project__weeks-text_color_green {
+  margin: 0;
+  padding: 11px 0;
+  width: 100px;
+  height: 35px;
+  color: #000;
+  background-color: #2be080;
+}
+
+.about-project__weeks-text_color_grey {
+  margin: 0;
+  padding: 11px 0;
+  width: 184px;
+  height: 35px;
+  color: #000;
+  background-color: #f2f2f2;
+}
+
+@media screen and (min-width: 768px) {
+  .about-project {
+    max-width: 768px;
+  }
+
+  .about-project__title {
+    margin: 80px 0 0 50px;
+    max-width: 600px;
+    font-size: 22px;
+    line-height: 27px;
+  }
+
+  .about-project__line {
+    margin: 23px 0 0 50px;
+    max-width: 668px;
+  }
+
+  .about-project__container {
+    grid-template-columns: repeat(2, 319px);
+    grid-template-rows: repeat(2, auto);
+    align-self: center;
+    column-gap: 30px;
+  }
+
+  .about-project__title_in-container:nth-of-type(1) {
+    margin: 70px 0 0 0;
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .about-project__title_in-container:nth-of-type(2) {
+    margin: 70px 0 0 0;
+    grid-column: 2;
+    grid-row: 1;
+    font-size: 20px;
+    line-height: 24px;
+  }
+
+  .about-project__description {
+    margin: 22px 0 0 0;
+    max-width: 319px;
+    font-size: 12px;
+    line-height: 18px;
+  }
+
+  .about-project__description:nth-of-type(1) {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .about-project__description:nth-of-type(2) {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .about-project__weeks-container {
+    margin: 93px 0 121px 0;
+    max-width: 768px;
+  }
+
+  .about-project__weeks-text {
+    margin: 14px 0 0 0;
+    padding: 0;
+    max-height: 17px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+
+  .about-project__weeks-text_color_green {
+    margin: 0;
+    padding: 9px 0;
+    width: 140px;
+    height: 36px;
+  }
+
+  .about-project__weeks-text_color_grey {
+    margin: 0;
+    padding: 9px 0;
+    width: 528px;
+    height: 36px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .about-project {
+    max-width: 1280px;
+  }
+
+  .about-project__title {
+    margin: 110px 0 0 70px;
+  }
+
+  .about-project__line {
+    margin: 23px 0 0 70px;
+    max-width: 1140px;
+  }
+
+  .about-project__container {
+    grid-template-columns: repeat(2, 550px);
+    column-gap: 40px;
+  }
+
+  .about-project__description {
+    margin-top: 26px;
+    max-width: 550px;
+    font-size: 14px;
+    line-height: 20px;
+  }
+
+  .about-project__weeks-container {
+    margin: 110px 0 141px 0;
+    max-width: 1280px;
+  }
+
+  .about-project__weeks-text {
+    margin-top: 23px;
+  }
+
+  .about-project__weeks-text_color_green {
+    width: 228px;
+  }
+
+  .about-project__weeks-text_color_grey {
+    width: 912px;
+  }
+}

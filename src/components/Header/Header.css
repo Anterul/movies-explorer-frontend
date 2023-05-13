@@ -197,6 +197,10 @@
     max-width: 1280px;
   }
 
+  .header__logo {
+    margin-left: 70px;
+  }
+
   .header__auth-link-container {
     padding-right: 70px;
   }
