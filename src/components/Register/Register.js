@@ -25,7 +25,7 @@ function Register(props) {
 
   return (
     <div className="register">
-      <div className="register__logo"></div>
+      <NavLink className="register__logo" to="/"></NavLink>
       <h2 className="register__title">Добро пожаловать!</h2>
       <form className="register__form" onSubmit={handleSubmit}>
         <div className="register__input-container">

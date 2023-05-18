@@ -1,0 +1,25 @@
+.movies-card {
+}
+
+.movies-card__image {
+  width: 300px;
+  height: 168px;
+}
+
+.movies-card__name {
+  margin: 14px 12px 0 0;
+  padding: 0;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 15px;
+  color: #000;
+}
+
+.movies-card__duration {
+  margin: 8px 12px 0 0;
+  padding: 0;
+  font-size: 11px;
+  font-weight: 400;
+  line-height: 13px;
+  color: #a0a0a0;
+}
