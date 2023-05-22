@@ -1,12 +1,12 @@
 import MoviesCard from "../MoviesCard/MoviesCard";
 
-function MoviesCardList(props) {
+function MoviesCardList({ postsToRender, next }) {
   return (
-    <section className="movies-card-list">
-      {props.movies.map((movie) => (
-        <MoviesCard movie={movie} key={movie._id} />
+    <ul className="movies-card-list">
+      {postsToRender?.slice(0, next)?.map((movie, index) => (
+        <MoviesCard movie={movie} key={index} />
       ))}
-    </section>
+    </ul>
   );
 }
 

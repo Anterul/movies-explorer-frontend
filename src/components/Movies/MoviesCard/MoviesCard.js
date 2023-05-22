@@ -1,10 +1,15 @@
+import { useState } from "react";
+import convertToHours from "../../../utils/ConvertToHours";
+
 function MoviesCard(props) {
-  function convertToHours(duration) {
-    const hour = Math.floor(duration / 60);
-    let minute = duration % 60;
-    minute = minute < 10 ? "0" + minute : minute;
-    return hour + "ч " + minute + "м";
+  const [likeButtonIsActive, setLikeButtonIsActive] = useState();
+  function handleLikeButton() {
+    setLikeButtonIsActive(!likeButtonIsActive);
   }
+
+  function handleDeleteButton() {}
+
+  const [isLiked, setIsLiked] = useState(false);
   return (
     <article className="movies-card">
       <img
@@ -16,7 +21,21 @@ function MoviesCard(props) {
       <p className="movies-card__duration">
         {convertToHours(props.movie.duration)}
       </p>
-      <button className="movies-card__button" type="button"></button>
+      {isLiked ? (
+        <button
+          className="movies-card__delete-button"
+          type="button"
+          onClick={handleDeleteButton}
+        ></button>
+      ) : (
+        <button
+          className={`movies-card__like-button ${
+            likeButtonIsActive ? "movies-card__like-button_active" : ""
+          }`}
+          type="button"
+          onClick={handleLikeButton}
+        ></button>
+      )}
     </article>
   );
 }

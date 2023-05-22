@@ -1,6 +1,8 @@
+import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import FilterCheckbox from "./FilterCheckbox/FilterCheckbox";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
+import Preloader from "./Preloader/Preloader";
 import SearchForm from "./SearchForm/SearchForm";
 
 function Movies(props) {
@@ -10,8 +12,10 @@ function Movies(props) {
       <section className="movies">
         <SearchForm />
         <FilterCheckbox />
-        <MoviesCardList movies={props.movies} />
+        <MoviesCardList postsToRender={props.postsToRender} next={props.next} />
+        <Preloader onLoadMoreClick={props.onLoadMoreClick} />
       </section>
+      <Footer />
     </>
   );
 }

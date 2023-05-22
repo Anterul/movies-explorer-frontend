@@ -13,8 +13,10 @@ import Movies from "../Movies/Movies";
 // contexts
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 // react tools
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
+
+const moviesPerPage = 3;
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -36,36 +38,85 @@ function App() {
     setIsMenuPopupOpen(false);
   }
 
+  // временный массив
   const movies = [
     {
       duration: "120",
-      nameRU: "33 слова о дизайне",
+      nameRU: "1 слово о дизайне",
       image:
         "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "111",
+      _id: "1",
     },
     {
       duration: "100",
-      nameRU: "34 слова о дизайне",
+      nameRU: "2 слова о дизайне",
       image:
         "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "112",
+      _id: "2",
     },
     {
       duration: "110",
-      nameRU: "32 слова о дизайне",
+      nameRU: "3 слова о дизайне",
       image:
         "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "113",
+      _id: "3",
     },
     {
       duration: "110",
-      nameRU: "32 слова о дизайне",
+      nameRU: "4 слова о дизайне",
       image:
         "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "114",
+      _id: "4",
+    },
+    {
+      duration: "110",
+      nameRU: "5 слов о дизайне",
+      image:
+        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
+      _id: "5",
+    },
+    {
+      duration: "110",
+      nameRU: "6 слов о дизайне",
+      image:
+        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
+      _id: "6",
+    },
+    {
+      duration: "110",
+      nameRU: "7 слов о дизайне",
+      image:
+        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
+      _id: "7",
+    },
+    {
+      duration: "110",
+      nameRU: "8 слов о дизайне",
+      image:
+        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
+      _id: "8",
+    },
+    {
+      duration: "110",
+      nameRU: "9 слов о дизайне",
+      image:
+        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
+      _id: "9",
+    },
+    {
+      duration: "110",
+      nameRU: "10 слов о дизайне",
+      image:
+        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
+      _id: "10",
     },
   ];
+
+  // кнопка "Ещё"
+  const [next, setNext] = useState(moviesPerPage);
+  const handleMoreMovies = () => {
+    setNext(next + moviesPerPage);
+  };
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -94,7 +145,9 @@ function App() {
               <Movies
                 isLoggedIn={isLoggedIn}
                 onMenuClick={handleIsMenuPopupOpen}
-                movies={movies}
+                postsToRender={movies}
+                onLoadMoreClick={handleMoreMovies}
+                next={next}
               />
             }
           />
