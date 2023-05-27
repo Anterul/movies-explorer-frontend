@@ -9,12 +9,12 @@ function SavedMovies(props) {
   return (
     <>
       <Header isLoggedIn={props.isLoggedIn} onMenuClick={props.onMenuClick} />
-      <section className="movies">
+      <main className="movies">
         <SearchForm />
         <FilterCheckbox />
         <MoviesCardList postsToRender={props.postsToRender} next={props.next} />
         <Preloader onLoadMoreClick={props.onLoadMoreClick} />
-      </section>
+      </main>
       <Footer />
     </>
   );

@@ -60,6 +60,16 @@
   border-radius: 8px;
 }
 
+.login__input:hover {
+  outline: 2px solid #ff6838;
+  border-radius: 5px;
+}
+
+.login__input:focus {
+  outline: 2px solid #2be080;
+  border-radius: 5px;
+}
+
 .login__error-message {
   margin: 10px 0 0 0;
   padding: 0;
@@ -121,7 +131,7 @@
 
   .login__logo {
     align-self: flex-start;
-    margin: 232px 0 0 186px;
+    margin: 70px 0 0 186px;
   }
 
   .login__title {

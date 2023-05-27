@@ -21,7 +21,12 @@
 
 .search-form__input:hover {
   outline: 2px solid #ff6838;
-  border-radius: 3px;
+  border-radius: 5px;
+}
+
+.search-form__input:focus {
+  outline: 2px solid #2be080;
+  border-radius: 5px;
 }
 
 .search-form__button {

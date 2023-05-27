@@ -11,16 +11,11 @@ function MenuPopup({ isOpen, onClose }) {
           onClick={onClose}
         ></button>
         <Navigation onClose={onClose} />
-        <button className="menu-popup__account-button" type="button">
-          <Link
-            className="manu-popup__account-text"
-            to="/profile"
-            onClick={onClose}
-          >
-            Аккаунт
-          </Link>
-          <div className="manu-popup__account-icon"></div>
-        </button>
+        <Link
+          className="menu-popup__account-icon"
+          to="/profile"
+          onClick={onClose}
+        ></Link>
       </div>
     </div>
   );

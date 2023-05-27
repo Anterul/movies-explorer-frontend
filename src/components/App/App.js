@@ -20,7 +20,7 @@ import { Routes, Route } from "react-router-dom";
 const moviesPerPage = 3;
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   function handleIsLoggedIn() {
     setIsLoggedIn(true);
   }

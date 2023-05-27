@@ -41,12 +41,7 @@ function Header({ isLoggedIn, onMenuClick }) {
                   Сохранённые фильмы
                 </Link>
               </div>
-              <button className="header__profile-button" type="button">
-                <Link className="header__account-text" to="/profile">
-                  Аккаунт
-                </Link>
-                <div className="header__account-icon"></div>
-              </button>
+              <Link className="header__account-icon" to="/profile"></Link>
             </div>
           ) : (
             <button
