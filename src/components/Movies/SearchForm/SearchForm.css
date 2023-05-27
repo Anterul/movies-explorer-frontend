@@ -15,12 +15,13 @@
   font-weight: 500;
   line-height: 22px;
   border: 0;
-  outline: 0;
-  color: #a0a0a0;
+  outline: none;
+  color: #000;
 }
 
 .search-form__input:hover {
-  color: #000;
+  outline: 2px solid #ff6838;
+  border-radius: 3px;
 }
 
 .search-form__button {

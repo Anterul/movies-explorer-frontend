@@ -14,9 +14,9 @@ function Header({ isLoggedIn, onMenuClick }) {
 
   return (
     <>
-      {isLoggedIn ? (
+      {!isLoggedIn ? (
         <header className="header">
-          <div className="header__logo"></div>
+          <Link className="header__logo" to="/"></Link>
           <div className="header__auth-link-container">
             <Link className="header__auth-link" to="/signup">
               Регистрация
@@ -30,7 +30,7 @@ function Header({ isLoggedIn, onMenuClick }) {
         </header>
       ) : (
         <header className="header">
-          <div className="header__logo"></div>
+          <Link className="header__logo" to="/"></Link>
           {screenWidth ? (
             <div className="header__menu-container">
               <div className="header__films-link-container">

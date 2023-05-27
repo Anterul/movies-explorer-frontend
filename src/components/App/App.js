@@ -10,6 +10,7 @@ import MenuPopup from "../MenuPopup/MenuPopup";
 import Profile from "../Profile/Profile";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
 // contexts
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 // react tools
@@ -19,7 +20,7 @@ import { Routes, Route } from "react-router-dom";
 const moviesPerPage = 3;
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
   function handleIsLoggedIn() {
     setIsLoggedIn(true);
   }
@@ -143,6 +144,19 @@ function App() {
             path="/movies"
             element={
               <Movies
+                isLoggedIn={isLoggedIn}
+                onMenuClick={handleIsMenuPopupOpen}
+                postsToRender={movies}
+                onLoadMoreClick={handleMoreMovies}
+                next={next}
+              />
+            }
+          />
+
+          <Route
+            path="/saved-movies"
+            element={
+              <SavedMovies
                 isLoggedIn={isLoggedIn}
                 onMenuClick={handleIsMenuPopupOpen}
                 postsToRender={movies}

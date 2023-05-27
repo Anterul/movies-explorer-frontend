@@ -9,7 +9,7 @@ function MoviesCard(props) {
 
   function handleDeleteButton() {}
 
-  const [isLiked, setIsLiked] = useState(false);
+  const [isLiked, setIsLiked] = useState(true);
   return (
     <article className="movies-card">
       <img
