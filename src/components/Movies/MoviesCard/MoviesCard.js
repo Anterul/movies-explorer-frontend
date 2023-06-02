@@ -1,5 +1,6 @@
 import { useState } from "react";
 import convertToHours from "../../../utils/ConvertToHours";
+import { MOVIES_URL } from "../../../utils/Config";
 
 function MoviesCard(props) {
   const [likeButtonIsActive, setLikeButtonIsActive] = useState();
@@ -14,8 +15,8 @@ function MoviesCard(props) {
     <article className="movies-card">
       <img
         className="movies-card__image"
-        src={props.movie.image}
-        alt={props.movie.nameRU}
+        src={`https://api.nomoreparties.co/${props.movie.image.url}`}
+        alt={props.movie.image.name}
       />
       <h2 className="movies-card__name">{props.movie.nameRU}</h2>
       <p className="movies-card__duration">

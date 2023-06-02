@@ -7,6 +7,15 @@
   list-style: none;
 }
 
+.movies-card-list__notification {
+  margin: 0;
+  padding: 0;
+  font-size: 29px;
+  font-weight: 400;
+  line-height: 37px;
+  color: #ee3465;
+}
+
 @media screen and (min-width: 768px) {
   .movies-card-list {
     max-width: 768px;

@@ -1,4 +1,3 @@
-// import logo from './logo.svg';
 import "./App.css";
 // components
 import Header from "../Header/Header";
@@ -15,19 +14,24 @@ import SavedMovies from "../SavedMovies/SavedMovies";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 // react tools
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
+// utils
+import ProtectedRoute from "../../utils/ProtectedRoute";
+import * as MainApi from "../../utils/MainApi";
+import * as MoviesApi from "../../utils/MoviesApi";
 
 const moviesPerPage = 3;
 
 function App() {
+  // хуки
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   function handleIsLoggedIn() {
     setIsLoggedIn(true);
   }
 
   const [currentUser, setCurrentUser] = useState({
-    name: "Name", // временно Name, вернуть ""
-    email: "aa@aa.ru",
+    name: "",
+    email: "",
   });
 
   const [isMenuPopupOpen, setIsMenuPopupOpen] = useState(false);
@@ -39,85 +43,157 @@ function App() {
     setIsMenuPopupOpen(false);
   }
 
-  // временный массив
-  const movies = [
-    {
-      duration: "120",
-      nameRU: "1 слово о дизайне",
-      image:
-        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "1",
-    },
-    {
-      duration: "100",
-      nameRU: "2 слова о дизайне",
-      image:
-        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "2",
-    },
-    {
-      duration: "110",
-      nameRU: "3 слова о дизайне",
-      image:
-        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "3",
-    },
-    {
-      duration: "110",
-      nameRU: "4 слова о дизайне",
-      image:
-        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "4",
-    },
-    {
-      duration: "110",
-      nameRU: "5 слов о дизайне",
-      image:
-        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "5",
-    },
-    {
-      duration: "110",
-      nameRU: "6 слов о дизайне",
-      image:
-        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "6",
-    },
-    {
-      duration: "110",
-      nameRU: "7 слов о дизайне",
-      image:
-        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "7",
-    },
-    {
-      duration: "110",
-      nameRU: "8 слов о дизайне",
-      image:
-        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "8",
-    },
-    {
-      duration: "110",
-      nameRU: "9 слов о дизайне",
-      image:
-        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "9",
-    },
-    {
-      duration: "110",
-      nameRU: "10 слов о дизайне",
-      image:
-        "https://images.unsplash.com/photo-1682957093349-0e83f097e1c4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-      _id: "10",
-    },
-  ];
+  const [isSignUp, setIsSignUp] = useState(false);
+  function handleSignUpStatus() {
+    setIsSignUp(true);
+  }
+
+  const [isSignIn, setIsSignIn] = useState(false);
+  function handleSignInStatus() {
+    setIsSignIn(true);
+  }
+
+  const [movies, setMovies] = useState([]);
+  function resetMovies() {
+    setMovies([]);
+  }
 
   // кнопка "Ещё"
   const [next, setNext] = useState(moviesPerPage);
   const handleMoreMovies = () => {
     setNext(next + moviesPerPage);
   };
+  function resetSetNext() {
+    setNext(3);
+  }
+
+  const [searchButtonWasPressed, setSearchButtonWasPressed] = useState(false);
+  function handleSearchButtonWasPressed() {
+    setSearchButtonWasPressed(true);
+  }
+
+  const [showMoreButton, setShowMoreButton] = useState(true);
+  function handleShowMoreButton() {
+    setShowMoreButton(false);
+  }
+
+  // функции
+  const navigate = useNavigate();
+
+  function handleRegister(name, email, password) {
+    MainApi.register(name, email, password)
+      .then((res) => {
+        handleSignUpStatus();
+        navigate("/signin", { replace: true });
+      })
+      .catch((error) => {
+        console.log(`Ошибка: ${error}`);
+        setIsSignUp(false);
+      });
+  }
+
+  function handleLogin(email, password) {
+    MainApi.login(email, password)
+      .then((data) => {
+        if (data.token) {
+          handleSignInStatus();
+          handleIsLoggedIn();
+          localStorage.setItem("jwt", data.token);
+          navigate("/", { replace: true });
+        }
+      })
+      .catch((error) => {
+        console.log(`Ошибка: ${error}`);
+        setIsSignIn(false);
+      });
+  }
+
+  function signOut() {
+    localStorage.removeItem("jwt");
+    setCurrentUser({
+      name: "",
+      email: "",
+    });
+    navigate("/", { replace: true });
+    setIsLoggedIn(false);
+  }
+
+  function checkToken() {
+    const jwt = localStorage.getItem("jwt");
+    if (jwt) {
+      MainApi.checkToken(jwt)
+        .then((res) => {
+          if (res) {
+            setIsLoggedIn(true);
+            navigate("/", { replace: true });
+          }
+        })
+        .catch((error) => {
+          console.log(`Ошибка: ${error}`);
+        });
+    }
+  }
+
+  useEffect(() => {
+    MainApi.getUserInfo()
+      .then((userData) => {
+        setCurrentUser({
+          name: userData.name,
+          email: userData.email,
+        });
+      })
+      .catch((error) => {
+        console.log(`Ошибка: ${error}`);
+      });
+
+    checkToken();
+  }, [isLoggedIn]);
+
+  function handleChangeUserInfo(name, email) {
+    MainApi.changeUserInfo(name, email)
+      .then((userData) => {
+        setCurrentUser({
+          name: userData.name,
+          email: userData.email,
+        });
+      })
+      .catch((error) => {
+        console.log(`Ошибка: ${error}`);
+      });
+  }
+
+  /* // без local storage
+    const filteredItems = result.filter(
+          (item) =>
+            item.nameRU
+              .toLocaleLowerCase()
+              .includes(someQuery.toLocaleLowerCase()) ||
+            item.nameEN
+              .toLocaleLowerCase()
+              .includes(someQuery.toLocaleLowerCase())
+    );
+  */
+
+  function executeSearchQuery(someQuery) {}
+  /*
+  const localFilteredItems = localStorage.getItem("localFilteredItems");
+  console.log(JSON.parse(localFilteredItems));*/
+
+  useEffect(() => {
+    MoviesApi.getMovies()
+      .then((movies) => {
+        window.localStorage.setItem(
+          "localFilteredItems",
+          JSON.stringify(movies)
+        );
+      })
+      .catch((error) => {
+        console.log(`Ошибка: ${error}`);
+      });
+  });
+
+  const test = JSON.parse(localStorage.getItem("localFilteredItems"));
+  setMovies(test);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -136,27 +212,35 @@ function App() {
               </>
             }
           />
-
-          <Route path="/signup" element={<Register />} />
-          <Route path="/signin" element={<Login />} />
-
+          <Route
+            path="/signup"
+            element={<Register onSignUp={handleRegister} />}
+          />
+          <Route path="/signin" element={<Login onSignIn={handleLogin} />} />
           <Route
             path="/movies"
             element={
-              <Movies
+              <ProtectedRoute
+                exact
+                element={Movies}
                 isLoggedIn={isLoggedIn}
                 onMenuClick={handleIsMenuPopupOpen}
                 postsToRender={movies}
+                resetSetNext={resetSetNext}
                 onLoadMoreClick={handleMoreMovies}
                 next={next}
+                executeSearchQuery={executeSearchQuery}
+                onSearchButtonClick={handleSearchButtonWasPressed}
+                searchButtonWasPressed={searchButtonWasPressed}
               />
             }
           />
-
           <Route
             path="/saved-movies"
             element={
-              <SavedMovies
+              <ProtectedRoute
+                exact
+                element={SavedMovies}
                 isLoggedIn={isLoggedIn}
                 onMenuClick={handleIsMenuPopupOpen}
                 postsToRender={movies}
@@ -165,13 +249,16 @@ function App() {
               />
             }
           />
-
           <Route
             path="/profile"
             element={
-              <Profile
+              <ProtectedRoute
+                exact
+                element={Profile}
                 isLoggedIn={isLoggedIn}
                 onMenuClick={handleIsMenuPopupOpen}
+                onExitButtonClick={signOut}
+                onEditButtonClick={handleChangeUserInfo}
               />
             }
           />

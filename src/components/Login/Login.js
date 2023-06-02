@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 
 function Login(props) {
@@ -15,8 +15,16 @@ function Login(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onSignUp(email, password);
+    if (!email || !password) {
+      return;
+    }
+    props.onSignIn(email, password);
   }
+
+  useEffect(() => {
+    setEmail("");
+    setPassword("");
+  }, []);
 
   return (
     <div className="login">
@@ -47,7 +55,7 @@ function Login(props) {
             id="password"
             required
           />
-          <span className="login__error-message">Что-то пошло не так...</span>
+          <span className="login__error-message"></span>
         </div>
         <button className="login__submit-button" type="submit">
           Войти

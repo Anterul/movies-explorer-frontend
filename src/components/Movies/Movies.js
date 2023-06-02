@@ -10,10 +10,22 @@ function Movies(props) {
     <>
       <Header isLoggedIn={props.isLoggedIn} onMenuClick={props.onMenuClick} />
       <main className="movies">
-        <SearchForm />
+        <SearchForm
+          executeSearchQuery={props.executeSearchQuery}
+          onSearchButtonClick={props.onSearchButtonClick}
+          resetSetNext={props.resetSetNext}
+        />
         <FilterCheckbox />
-        <MoviesCardList postsToRender={props.postsToRender} next={props.next} />
-        <Preloader onLoadMoreClick={props.onLoadMoreClick} />
+        <MoviesCardList
+          postsToRender={props.postsToRender}
+          next={props.next}
+          searchButtonWasPressed={props.searchButtonWasPressed}
+        />
+        <Preloader
+          onLoadMoreClick={props.onLoadMoreClick}
+          postsToRender={props.postsToRender}
+          next={props.next}
+        />
       </main>
       <Footer />
     </>
