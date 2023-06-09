@@ -15,7 +15,7 @@ import Tooltip from "../Tooltip/Tooltip";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 // react tools
 import { useState, useEffect } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, useLocation } from "react-router-dom";
 // utils
 import ProtectedRoute from "../../utils/ProtectedRoute";
 import * as MainApi from "../../utils/MainApi";
@@ -25,7 +25,18 @@ const moviesPerPage = 3;
 
 function App() {
   // хуки
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // запись loggedIn в localStorage, чтобы входить на любую страницу
+  function checkIsLoggedInLocal() {
+    if (JSON.parse(localStorage.getItem("isLoggedIn")) === "true") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+  const [isLoggedIn, setIsLoggedIn] = useState(
+    localStorage.isLoggedIn ? checkIsLoggedInLocal() : false
+  );
+  //
   const [currentUser, setCurrentUser] = useState({
     name: "",
     email: "",
@@ -101,12 +112,6 @@ function App() {
     }
   }
 
-  // проверка токена при монтировании
-
-  useEffect(() => {
-    checkToken();
-  }, []);
-
   // прелоадер
 
   const [isMoviesLoading, setIsMoviesLoading] = useState(false);
@@ -133,6 +138,7 @@ function App() {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
           checkToken();
+          navigate("/movies", { replace: true });
         }
       })
       .catch((error) => {
@@ -153,6 +159,7 @@ function App() {
       email: "",
     });
     setIsLoggedIn(false);
+    localStorage.setItem("isLoggedIn", JSON.stringify("false"));
     navigate("/", { replace: true });
   }
 
@@ -163,7 +170,7 @@ function App() {
         .then((res) => {
           if (res) {
             setIsLoggedIn(true);
-            navigate("/movies", { replace: true });
+            localStorage.setItem("isLoggedIn", JSON.stringify("true"));
           }
         })
         .catch((error) => {
@@ -321,6 +328,17 @@ function App() {
     setFilteredSavedMovies(newFilteredSavedMovies);
     setTimeout(() => setIsMoviesLoading(false), 200);
   }
+
+  // редирект с логина и регистера, если прошла авторизация
+  const location = useLocation();
+  useEffect(() => {
+    if (
+      isLoggedIn &&
+      (location.pathname === "/signup" || location.pathname === "/signin")
+    ) {
+      navigate("/", { replace: true });
+    }
+  }, [isLoggedIn, location.pathname]);
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
