@@ -1,5 +1,7 @@
+/* vendor */
 @import url(./vendor/normalize.css);
 @import url(./vendor/fonts/Inter-Web/inter.css);
+/* components */
 @import url(./components/App/App.css);
 @import url(./components/Header/Header.css);
 @import url(./components/Register/Register.css);
@@ -22,11 +24,7 @@
 @import url(./components/Movies/MoviesCardList/MoviesCardList.css);
 @import url(./components/Movies/MoviesCard/MoviesCard.css);
 @import url(./components/Movies/Preloader/Preloader.css);
-/*
-@import url();
-@import url();
-@import url();
-@import url();
-@import url();
-@import url();
-*/
+@import url(./components/SavedMovies/SavedMovies.css);
+@import url(./components/SavedMovies/SavedMoviesCardList/SavedMoviesCardList.css);
+@import url(./components/SavedMovies/SavedMoviesCard/SavedMoviesCard.css);
+@import url(./components/Tooltip/Tooltip.css);

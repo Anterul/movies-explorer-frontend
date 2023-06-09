@@ -1,16 +1,66 @@
 import MoviesCard from "../MoviesCard/MoviesCard";
+import Preloader from "../Preloader/Preloader";
+import ERROR_MESSAGES from "../../../utils/Config";
 
-function MoviesCardList({ postsToRender, next, searchButtonWasPressed }) {
+function MoviesCardList({
+  savedBeatfilms,
+  next,
+  onMovieLike,
+  onLoadMoreClick,
+  isPreloader,
+  moviesRequestError,
+  isSearchButtonPressed,
+  isShort,
+  savedMovies,
+}) {
+  function handleLoadMore() {
+    onLoadMoreClick();
+  }
+
+  const filteredShorts = isShort
+    ? savedBeatfilms.filter((movie) => movie.duration <= 40)
+    : savedBeatfilms;
+
+  const isMoviesArrEnded =
+    filteredShorts.length === 0 || next >= filteredShorts.length;
+
   return (
-    <ul className="movies-card-list">
-      {postsToRender.length === 0 && searchButtonWasPressed ? (
-        <p className="movies-card-list__notification">Ничего не найдено</p>
+    <div className="movies-card-list">
+      {isPreloader ? (
+        <Preloader />
+      ) : moviesRequestError ? (
+        <p className="movies-card-list__notification">
+          {ERROR_MESSAGES.MOVIES.REQUEST_ERROR}
+        </p>
+      ) : filteredShorts.length === 0 && isSearchButtonPressed ? (
+        <p className="movies-card-list__notification">
+          {ERROR_MESSAGES.MOVIES.NOTHING}
+        </p>
       ) : (
-        postsToRender
-          ?.slice(0, next)
-          ?.map((movie, index) => <MoviesCard movie={movie} key={index} />)
+        <ul className="movies-card-list__list">
+          {filteredShorts?.slice(0, next)?.map((movie) => (
+            <MoviesCard
+              movie={movie}
+              key={movie.id}
+              onMovieLike={onMovieLike}
+              savedMovies={savedMovies}
+            />
+          ))}
+        </ul>
       )}
-    </ul>
+
+      {isMoviesArrEnded ? (
+        ""
+      ) : (
+        <button
+          className="movies-card-list__button"
+          type="button"
+          onClick={handleLoadMore}
+        >
+          Ещё
+        </button>
+      )}
+    </div>
   );
 }
 

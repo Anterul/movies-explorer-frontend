@@ -2,7 +2,7 @@ import { BASE_URL } from "../utils/Config";
 
 function getResponseData(response) {
   if (!response.ok) {
-    return Promise.reject(`Ошибка: ${response.status}`);
+    return Promise.reject(response.status);
   }
   return response.json();
 }
@@ -67,5 +67,49 @@ export function changeUserInfo(name, email) {
       name: name,
       email: email,
     }),
+  });
+}
+
+export function createMoveCard(movie) {
+  return request("/movies", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+    body: JSON.stringify({
+      country: movie.country,
+      director: movie.director,
+      duration: movie.duration,
+      year: movie.year,
+      description: movie.description,
+      image: "https://api.nomoreparties.co" + movie.image.url,
+      trailerLink: movie.trailerLink,
+      thumbnail:
+        "https://api.nomoreparties.co" + movie.image.formats.thumbnail.url,
+      movieId: String(movie.id),
+      nameRU: movie.nameRU,
+      nameEN: movie.nameEN,
+    }),
+  });
+}
+
+export function deleteMovieCard(movie) {
+  return request(`/movies/${movie._id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+}
+
+export function getSavedMovies() {
+  return request("/movies", {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getToken()}`,
+    },
   });
 }

@@ -22,12 +22,13 @@
 }
 
 .profile__text-contailer {
-  margin: 0 0 16px 0;
+  margin: 0 0 3px 0;
   padding: 0;
   width: 260px;
   height: auto;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 50px minmax(10px, auto);
+  grid-template-rows: repeat(2, auto);
 }
 
 .profile__text-container_email {
@@ -43,18 +44,62 @@
   font-size: 11px;
   font-weight: 500;
   line-height: 13px;
-  text-align: right;
+  text-align: left;
   border: none;
   color: #000;
+  grid-column: 1;
+  grid-row: 1;
 }
 
-.profile__text:focus {
-  outline: 1px solid #2be080;
-  border-radius: 5px;
-}
-
-.profile__text_current-user {
+.profile__input {
+  margin: 0;
+  padding: 0;
+  min-width: 1px;
+  font-size: 11px;
   font-weight: 400;
+  line-height: 13px;
+  text-align: right;
+  color: #000;
+  border: none;
+  outline: none;
+  grid-column: 2;
+  grid-row: 1;
+  transition-property: text-align, outline;
+  transition-duration: 0.4s;
+  transition-timing-function: linear;
+}
+
+.profile__input:focus {
+  text-align: center;
+  transition-property: text-align;
+  transition-duration: 0.4s;
+  transition-timing-function: linear;
+  outline: 1px solid #2be080;
+  border-radius: 2px;
+}
+
+.profile__input:hover {
+  outline: 1px solid rgba(43, 224, 128, 0.5);
+  border-radius: 2px;
+}
+
+.profile__error-message {
+  margin: 5px 0 0 0;
+  padding: 0;
+  min-width: 1px;
+  height: 13px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 13px;
+  text-align: right;
+  border: none;
+  color: #ee3465;
+  grid-column: 1 / 3;
+  grid-row: 2;
+}
+
+.profile__error-message_text-center {
+  text-align: center;
 }
 
 .profile__button {
@@ -67,23 +112,41 @@
   border: none;
   background-color: #fff;
   cursor: pointer;
-  transition: opacity 0.3s;
-}
-
-.profile__button:hover {
-  opacity: 0.85;
 }
 
 .profile__button_type_redact {
   margin-top: 379px;
   font-weight: 400;
   color: #000;
+  transition-property: color;
+  transition-duration: 0.4s;
+  transition-timing-function: linear;
+}
+
+.profile__button_type_redact:disabled {
+  color: #bbb;
+}
+
+.profile__button_type_redact[disabled]:hover {
+  color: #bbb;
+}
+
+.profile__button_type_redact:hover {
+  color: #2be080;
 }
 
 .profile__button_type_exit {
-  margin: 16px 0 40px 0;
+  margin: 4px 0 40px 0;
   font-weight: 500;
   color: #ee3465;
+  opacity: 0.9;
+  transition-property: opacity;
+  transition-duration: 0.4s;
+  transition-timing-function: linear;
+}
+
+.profile__button_type_exit:hover {
+  opacity: 1;
 }
 
 @media screen and (min-width: 768px) {

@@ -38,9 +38,9 @@
   border-radius: 20px;
   background-image: url(../../../images/sheckbox-tumbler.svg);
   background-size: 12px 12px;
-  background-position: top 2px left 2px;
   background-repeat: no-repeat;
   background-color: #a0a0a0;
+  background-position: top 2px left 2px;
   cursor: pointer;
   transition-property: background-position, background-color;
   transition-duration: 0.1s;

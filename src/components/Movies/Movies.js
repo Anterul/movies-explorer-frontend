@@ -2,29 +2,51 @@ import Footer from "../Footer/Footer";
 import Header from "../Header/Header";
 import FilterCheckbox from "./FilterCheckbox/FilterCheckbox";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
-import Preloader from "./Preloader/Preloader";
 import SearchForm from "./SearchForm/SearchForm";
 
-function Movies(props) {
+function Movies({
+  isLoggedIn,
+  onMenuClick,
+  savedBeatfilms,
+  next,
+  onMovieLike,
+  onLoadMore,
+  executeSearchQuery,
+  isShort,
+  handleIsShort,
+  searchQuery,
+  setSearchQuery,
+  isPreloader,
+  handleSearchButton,
+  handleMoviesRequestError,
+  moviesRequestError,
+  isSearchButtonPressed,
+  savedMovies,
+}) {
   return (
     <>
-      <Header isLoggedIn={props.isLoggedIn} onMenuClick={props.onMenuClick} />
+      <Header isLoggedIn={isLoggedIn} onMenuClick={onMenuClick} />
       <main className="movies">
         <SearchForm
-          executeSearchQuery={props.executeSearchQuery}
-          onSearchButtonClick={props.onSearchButtonClick}
-          resetSetNext={props.resetSetNext}
+          executeSearchQuery={executeSearchQuery}
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          savedBeatfilms={savedBeatfilms}
+          handleMoviesRequestError={handleMoviesRequestError}
+          handleSearchButton={handleSearchButton}
         />
-        <FilterCheckbox />
+        <FilterCheckbox isShort={isShort} handleIsShort={handleIsShort} />
+
         <MoviesCardList
-          postsToRender={props.postsToRender}
-          next={props.next}
-          searchButtonWasPressed={props.searchButtonWasPressed}
-        />
-        <Preloader
-          onLoadMoreClick={props.onLoadMoreClick}
-          postsToRender={props.postsToRender}
-          next={props.next}
+          savedBeatfilms={savedBeatfilms}
+          next={next}
+          onMovieLike={onMovieLike}
+          onLoadMoreClick={onLoadMore}
+          isPreloader={isPreloader}
+          moviesRequestError={moviesRequestError}
+          isSearchButtonPressed={isSearchButtonPressed}
+          isShort={isShort}
+          savedMovies={savedMovies}
         />
       </main>
       <Footer />

@@ -1,33 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
-function SearchForm(props) {
-  const [searchQuery, setSearchQuery] = useState("");
-
+function SearchForm({
+  executeSearchQuery,
+  searchQuery,
+  setSearchQuery,
+  handleMoviesRequestError,
+  handleSearchButton,
+}) {
   function handleTextChange(e) {
+    localStorage.setItem(
+      "beatfilmsSearchQuery",
+      JSON.stringify(e.target.value)
+    );
     setSearchQuery(e.target.value);
   }
 
   const [emptyRequestError, setEmptyRequestError] = useState(false);
 
-  useEffect(() => {
-    if (searchQuery) {
-      setEmptyRequestError(false);
-    }
-  }, [searchQuery]);
+  function handleSearchQuery() {
+    executeSearchQuery(searchQuery);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
-
+    handleMoviesRequestError();
+    handleSearchButton();
     if (!searchQuery) {
       setEmptyRequestError(true);
     } else {
       setEmptyRequestError(false);
-      props.executeSearchQuery(searchQuery);
+      handleSearchQuery();
     }
-    props.resetSetNext();
-    setTimeout(() => {
-      props.onSearchButtonClick();
-    }, 1000);
   }
 
   return (

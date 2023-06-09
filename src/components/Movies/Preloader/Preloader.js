@@ -1,18 +1,9 @@
-function Preloader(props) {
+import src from "../../../images/three-dots.svg";
+
+function Preloader() {
   return (
     <div className="preloader">
-      {props.postsToRender.length === 0 ||
-      props.next >= props.postsToRender.length ? (
-        ""
-      ) : (
-        <button
-          className="preloader__button"
-          type="button"
-          onClick={props.onLoadMoreClick}
-        >
-          Ещё
-        </button>
-      )}
+      <img className="preloader__image" src={src} alt="preloader" />
     </div>
   );
 }
