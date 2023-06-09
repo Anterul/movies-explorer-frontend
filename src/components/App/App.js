@@ -168,6 +168,8 @@ function App() {
         })
         .catch((error) => {
           console.log(`Ошибка: ${error}`);
+          setIsRequestCompleted(false);
+          setIsTooltipOpen(true);
         });
     }
   }
@@ -184,6 +186,8 @@ function App() {
       })
       .catch((error) => {
         console.log(`Ошибка: ${error}`);
+        setIsRequestCompleted(false);
+        setIsTooltipOpen(true);
       });
   }
 
@@ -206,6 +210,8 @@ function App() {
         })
         .catch((error) => {
           console.log(`Ошибка: ${error}`);
+          setIsRequestCompleted(false);
+          setIsTooltipOpen(true);
         });
     } else {
       MainApi.createMoveCard(movie)
@@ -215,6 +221,8 @@ function App() {
         })
         .catch((error) => {
           console.log(`Ошибка: ${error}`);
+          setIsRequestCompleted(false);
+          setIsTooltipOpen(true);
         });
     }
   }
@@ -232,6 +240,8 @@ function App() {
         })
         .catch((error) => {
           console.log(`Ошибка: ${error}`);
+          setIsRequestCompleted(false);
+          setIsTooltipOpen(true);
         });
     }
   }, [isLoggedIn]);
@@ -273,6 +283,8 @@ function App() {
           .catch((error) => {
             console.log(`Ошибка: ${error}`);
             setMoviesRequestError(true);
+            setIsRequestCompleted(false);
+            setIsTooltipOpen(true);
           })
           .finally(() => {
             setIsMoviesLoading(false);
