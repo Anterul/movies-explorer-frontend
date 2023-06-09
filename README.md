@@ -8,7 +8,7 @@
 
 ## Ссылки на проект:
 
-Ссылка на пул реквест: https://github.com/Anterul/movies-explorer-frontend/pull/2#issue-1749484965
+Ссылка на пул реквест: https://github.com/Anterul/movies-explorer-frontend/pull/2#issue-1749484965  
 Адрес репозитория: https://github.com/Anterul/movies-explorer-frontend  
 IP 158.160.34.188  
 Frontend https://explorer.nomoredomains.monster  
