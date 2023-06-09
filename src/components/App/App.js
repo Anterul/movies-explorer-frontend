@@ -52,8 +52,7 @@ function App() {
     setIsTooltipOpen(false);
   }
 
-  // хуки фильмов
-
+  // хуки фильмов:
   const [savedBeatfilms, setSavedBeatfilms] = useState([]);
   const [filteredBeatfilms, setFilteredBeatfilms] = useState(
     JSON.parse(localStorage.getItem("filteredBeatfilms")) || []
@@ -78,6 +77,10 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
   const [savedMoviesSearchQuery, setSavedMoviesSearchQuery] = useState("");
+  const [savedMoviesShortState, setSavedMoviesShortState] = useState(false);
+  function handleSavedMoviesShortState() {
+    setSavedMoviesShortState(!savedMoviesShortState);
+  }
 
   // кнопка "Ещё"
   const [next, setNext] = useState(moviesPerPage);
@@ -417,8 +420,8 @@ function App() {
                 handleMoviesRequestError={handleMoviesRequestError}
                 handleSearchButton={handleSearchButton}
                 // чекбокс
-                isShort={isShort}
-                handleIsShort={handleIsShort}
+                isShort={savedMoviesShortState}
+                handleIsShort={handleSavedMoviesShortState}
               />
             }
           />
