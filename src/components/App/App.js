@@ -35,7 +35,7 @@ function App() {
     setIsMenuPopupOpen(true);
   }
   const [isTooltipOpen, setIsTooltipOpen] = useState(false);
-  const [isProfileEdit, setIsProfileEdit] = useState(false);
+  const [isRequestCompleted, setIsRequestCompleted] = useState(false);
   function closeAllPopups() {
     setIsMenuPopupOpen(false);
     setIsTooltipOpen(false);
@@ -122,6 +122,8 @@ function App() {
       })
       .catch((error) => {
         console.log(`Ошибка: ${error}`);
+        setIsTooltipOpen(true);
+        setIsRequestCompleted(false);
       });
   }
 
@@ -135,6 +137,8 @@ function App() {
       })
       .catch((error) => {
         console.log(`Ошибка: ${error}`);
+        setIsTooltipOpen(true);
+        setIsRequestCompleted(false);
       });
   }
 
@@ -240,12 +244,12 @@ function App() {
           email: userData.email,
         });
         setIsTooltipOpen(true);
-        setIsProfileEdit(true);
+        setIsRequestCompleted(true);
       })
       .catch((error) => {
         console.log(`Ошибка: ${error}`);
         setIsTooltipOpen(true);
-        setIsProfileEdit(false);
+        setIsRequestCompleted(false);
       });
   }
 
@@ -409,7 +413,7 @@ function App() {
         <Tooltip
           isOpen={isTooltipOpen}
           onClose={closeAllPopups}
-          isProfileEdit={isProfileEdit}
+          isRequestCompleted={isRequestCompleted}
         ></Tooltip>
       </div>
     </CurrentUserContext.Provider>
