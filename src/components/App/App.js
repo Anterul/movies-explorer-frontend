@@ -122,6 +122,7 @@ function App() {
   // функции
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   function handleRegister(name, email, password) {
     MainApi.register(name, email, password)
@@ -306,7 +307,7 @@ function App() {
   // сброс нажатия
   useEffect(() => {
     setIsSearchButtonPressed(false);
-  }, [beatfilmsSearchQuery, savedMoviesSearchQuery]);
+  }, [beatfilmsSearchQuery, savedMoviesSearchQuery, location.pathname]);
 
   // функции поиска
   function executeSearchQuery(searchQuery) {
@@ -333,7 +334,6 @@ function App() {
   }
 
   // редирект с логина и регистера, если прошла авторизация
-  const location = useLocation();
   useEffect(() => {
     if (
       isLoggedIn &&
