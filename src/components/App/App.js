@@ -125,7 +125,7 @@ function App() {
 
   function handleRegister(name, email, password) {
     MainApi.register(name, email, password)
-      .then(() => {
+      .then((res) => {
         handleLogin(email, password);
       })
       .catch((error) => {
