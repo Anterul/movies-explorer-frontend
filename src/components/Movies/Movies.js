@@ -22,6 +22,7 @@ function Movies({
   moviesRequestError,
   isSearchButtonPressed,
   savedMovies,
+  isSearchButtonDisabled,
 }) {
   return (
     <>
@@ -34,6 +35,7 @@ function Movies({
           savedBeatfilms={savedBeatfilms}
           handleMoviesRequestError={handleMoviesRequestError}
           handleSearchButton={handleSearchButton}
+          isSearchButtonDisabled={isSearchButtonDisabled}
         />
         <FilterCheckbox isShort={isShort} handleIsShort={handleIsShort} />
 

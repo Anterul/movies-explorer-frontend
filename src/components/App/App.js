@@ -73,6 +73,7 @@ function App() {
   function handleSearchButton() {
     setIsSearchButtonPressed(true);
   }
+  const [isSearchButtonDisabled, setIsSearchButtonDisabled] = useState(false);
 
   const [savedMovies, setSavedMovies] = useState([]);
   const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
@@ -283,6 +284,7 @@ function App() {
         }
         return;
       } else {
+        setIsSearchButtonDisabled(true);
         setIsMoviesLoading(true);
         MoviesApi.getMovies()
           .then((beatfilms) => {
@@ -299,6 +301,7 @@ function App() {
           })
           .finally(() => {
             setIsMoviesLoading(false);
+            setIsSearchButtonDisabled(false);
           });
       }
     }
@@ -311,6 +314,7 @@ function App() {
 
   // функции поиска
   function executeSearchQuery(searchQuery) {
+    setIsSearchButtonDisabled(true);
     setIsMoviesLoading(true);
     resetSetNext();
     const newFilteredBeatfilms = savedBeatfilms.filter((item) =>
@@ -321,7 +325,10 @@ function App() {
       "filteredBeatfilms",
       JSON.stringify(newFilteredBeatfilms)
     );
-    setTimeout(() => setIsMoviesLoading(false), 200);
+    setTimeout(() => {
+      setIsMoviesLoading(false);
+      setIsSearchButtonDisabled(false);
+    }, 200);
   }
 
   function findSavedMovies(searchQuery) {
@@ -330,7 +337,10 @@ function App() {
       item.nameRU.toLowerCase().includes(searchQuery.toLowerCase())
     );
     setFilteredSavedMovies(newFilteredSavedMovies);
-    setTimeout(() => setIsMoviesLoading(false), 200);
+    setTimeout(() => {
+      setIsMoviesLoading(false);
+      setIsSearchButtonDisabled(false);
+    }, 200);
   }
 
   // редирект с логина и регистера, если прошла авторизация
@@ -388,6 +398,7 @@ function App() {
                 setSearchQuery={setBeatfilmsSearchQuery}
                 handleMoviesRequestError={handleMoviesRequestError}
                 handleSearchButton={handleSearchButton}
+                isSearchButtonDisabled={isSearchButtonDisabled}
                 // чекбокс
                 isShort={isShort}
                 handleIsShort={handleIsShort}

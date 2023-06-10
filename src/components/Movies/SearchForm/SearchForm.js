@@ -6,6 +6,7 @@ function SearchForm({
   setSearchQuery,
   handleMoviesRequestError,
   handleSearchButton,
+  isSearchButtonDisabled,
 }) {
   function handleTextChange(e) {
     localStorage.setItem(
@@ -54,7 +55,11 @@ function SearchForm({
       <span className="search-form__error-message">
         {emptyRequestError ? "Нужно ввести ключевое слово" : ""}
       </span>
-      <button className="search-form__button" type="submit"></button>
+      <button
+        className="search-form__button"
+        type="submit"
+        disabled={isSearchButtonDisabled}
+      ></button>
       <div className="search-form__line"></div>
     </form>
   );
