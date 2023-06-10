@@ -98,10 +98,6 @@
   grid-row: 2;
 }
 
-.profile__error-message_text-center {
-  text-align: center;
-}
-
 .profile__button {
   margin: 0 auto;
   padding: 0;
@@ -136,7 +132,7 @@
 }
 
 .profile__button_type_exit {
-  margin: 4px 0 40px 0;
+  margin: 16px 0 40px 0;
   font-weight: 500;
   color: #ee3465;
   opacity: 0.9;

@@ -4,14 +4,12 @@ import Header from "../Header/Header";
 import { React } from "react";
 import { Formik } from "formik";
 import { ProfileSchema } from "../../utils/YupSchemes";
-import ERROR_MESSAGES from "../../utils/Config";
 
 function Profile(props) {
   const currentUser = useContext(CurrentUserContext);
 
   const [currentName, setCurrentName] = useState("");
   const [currentEmail, setCurrentEmail] = useState("");
-  const [isInputValuesRepeated, setIsInputValuesRepeated] = useState(false);
 
   useEffect(() => {
     setCurrentName(currentUser.name);
@@ -19,8 +17,12 @@ function Profile(props) {
   }, [currentUser]);
 
   const isFormValid = (formik) => {
-    return formik.isValid && Object.keys(formik.touched).length > 0;
+    return !formik.dirty || !formik.isValid;
   };
+
+  function handleExitButton() {
+    props.onExitButtonClick();
+  }
 
   return (
     <>
@@ -30,12 +32,7 @@ function Profile(props) {
         initialValues={{ name: currentName, email: currentEmail }}
         validationSchema={ProfileSchema}
         onSubmit={(values) => {
-          if (values.name === currentName && values.email === currentEmail) {
-            setIsInputValuesRepeated(true);
-          } else {
-            setIsInputValuesRepeated(false);
-            props.onEditButtonClick(values.name, values.email);
-          }
+          props.onEditButtonClick(values.name, values.email);
         }}
       >
         {(formik) => (
@@ -73,19 +70,16 @@ function Profile(props) {
               <button
                 className="profile__button profile__button_type_redact"
                 type="submit"
-                disabled={!isFormValid(formik)}
+                disabled={isFormValid(formik)}
               >
                 Редактировать
               </button>
-              <span className="profile__error-message profile__error-message_text-center">
-                {isInputValuesRepeated ? ERROR_MESSAGES.VALUES_REPEATED : ""}
-              </span>
             </form>
 
             <button
               className="profile__button profile__button_type_exit"
               type="button"
-              onClick={props.onExitButtonClick}
+              onClick={handleExitButton}
             >
               Выйти из аккаунта
             </button>
