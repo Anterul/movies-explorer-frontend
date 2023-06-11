@@ -143,7 +143,7 @@ function App() {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
           checkToken();
-          navigate("/movies", { replace: true });
+          // navigate("/movies", { replace: true });
         }
       })
       .catch((error) => {
@@ -152,6 +152,8 @@ function App() {
         setIsRequestCompleted(false);
       });
   }
+
+  console.log(isLoggedIn);
 
   function signOut() {
     localStorage.clear();
@@ -349,7 +351,7 @@ function App() {
       isLoggedIn &&
       (location.pathname === "/signup" || location.pathname === "/signin")
     ) {
-      navigate("/", { replace: true });
+      navigate("/movies", { replace: true });
     }
   }, [isLoggedIn, location.pathname]);
 
