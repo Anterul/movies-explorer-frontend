@@ -4,7 +4,7 @@ import ERROR_MESSAGES from "../../../utils/Config";
 
 function MoviesCardList({
   savedBeatfilms,
-  next,
+  nextDisplayedMovies,
   onMovieLike,
   onLoadMoreClick,
   isPreloader,
@@ -22,7 +22,7 @@ function MoviesCardList({
     : savedBeatfilms;
 
   const isMoviesArrEnded =
-    filteredShorts.length === 0 || next >= filteredShorts.length;
+    filteredShorts.length === 0 || nextDisplayedMovies >= filteredShorts.length;
 
   return (
     <div className="movies-card-list">
@@ -38,7 +38,7 @@ function MoviesCardList({
         </p>
       ) : (
         <ul className="movies-card-list__list">
-          {filteredShorts?.slice(0, next)?.map((movie) => (
+          {filteredShorts?.slice(0, nextDisplayedMovies)?.map((movie) => (
             <MoviesCard
               movie={movie}
               key={movie.id}

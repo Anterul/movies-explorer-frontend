@@ -21,6 +21,7 @@ import ProtectedRoute from "../../utils/ProtectedRoute";
 import * as MainApi from "../../utils/MainApi";
 import * as MoviesApi from "../../utils/MoviesApi";
 
+// переменная, отвечающая за количество отображаемых фильмов при клике на кнопку "Ещё"
 const moviesPerPage = 3;
 
 function App() {
@@ -52,8 +53,10 @@ function App() {
     setIsTooltipOpen(false);
   }
 
-  // хуки фильмов:
-  const [savedBeatfilms, setSavedBeatfilms] = useState([]);
+  // хуки для /movies (не используются в /saved-movies):
+  const [savedBeatfilms, setSavedBeatfilms] = useState(
+    JSON.parse(localStorage.getItem("savedBeatfilms")) || []
+  );
   const [filteredBeatfilms, setFilteredBeatfilms] = useState(
     JSON.parse(localStorage.getItem("filteredBeatfilms")) || []
   );
@@ -64,6 +67,7 @@ function App() {
       : ""
   );
 
+  // хуки для контроля состояний кнопки поиска
   const [moviesRequestError, setMoviesRequestError] = useState(false);
   function handleMoviesRequestError() {
     setMoviesRequestError(false);
@@ -75,6 +79,7 @@ function App() {
   }
   const [isSearchButtonDisabled, setIsSearchButtonDisabled] = useState(false);
 
+  // хуки для /saved-movies(не записываются в localstorage):
   const [savedMovies, setSavedMovies] = useState([]);
   const [filteredSavedMovies, setFilteredSavedMovies] = useState([]);
   const [savedMoviesSearchQuery, setSavedMoviesSearchQuery] = useState("");
@@ -84,15 +89,15 @@ function App() {
   }
 
   // кнопка "Ещё"
-  const [next, setNext] = useState(moviesPerPage);
+  const [nextDisplayedMovies, setNextDisplayedMovies] = useState(moviesPerPage);
   const handleMoreMovies = () => {
-    setNext(next + moviesPerPage);
+    setNextDisplayedMovies(nextDisplayedMovies + moviesPerPage);
   };
-  function resetSetNext() {
-    setNext(3);
+  function resetDisplayedMovies() {
+    setNextDisplayedMovies(moviesPerPage);
   }
 
-  // чекбокс с записью в localstorage
+  // чекбокс с записью в localstorage для компонента Movies и роута /movies
 
   function retutnIsShort() {
     if (JSON.parse(localStorage.getItem("shortState")) === "true") {
@@ -153,14 +158,20 @@ function App() {
       });
   }
 
-  console.log(isLoggedIn);
-
   function signOut() {
+    // удаляю весь localstorage
     localStorage.clear();
-    setSavedMovies([]);
+    // удяляю beatfilms, которые относятся к /movies
     setSavedBeatfilms([]);
     setFilteredBeatfilms([]);
     setBeatfilmsSearchQuery("");
+    setIsShort(false);
+    // удяляю savedMovies, которые относятся к /saved-movies
+    setSavedMovies([]);
+    setFilteredSavedMovies([]);
+    setSavedMoviesSearchQuery([]);
+    setSavedMoviesShortState(false);
+    // удаляю currentUser
     setCurrentUser({
       name: "",
       email: "",
@@ -314,11 +325,11 @@ function App() {
     setIsSearchButtonPressed(false);
   }, [beatfilmsSearchQuery, savedMoviesSearchQuery, location.pathname]);
 
-  // функции поиска
+  // функция поиска для компонента Movies и роута /movies с записью результата поиска в localstorage
   function executeSearchQuery(searchQuery) {
     setIsSearchButtonDisabled(true);
     setIsMoviesLoading(true);
-    resetSetNext();
+    resetDisplayedMovies();
     const newFilteredBeatfilms = savedBeatfilms.filter((item) =>
       item.nameRU.toLowerCase().includes(searchQuery.toLowerCase())
     );
@@ -333,6 +344,7 @@ function App() {
     }, 200);
   }
 
+  // функция поиска для компонента SavedMovies и роута /saved-movies, localStorage не используется
   function findSavedMovies(searchQuery) {
     setIsMoviesLoading(true);
     const newFilteredSavedMovies = savedMovies.filter((item) =>
@@ -390,7 +402,7 @@ function App() {
                 savedBeatfilms={filteredBeatfilms}
                 onMovieLike={handleMovieLike}
                 onLoadMore={handleMoreMovies}
-                next={next}
+                nextDisplayedMovies={nextDisplayedMovies}
                 moviesRequestError={moviesRequestError}
                 // прелодер
                 isPreloader={isMoviesLoading}

@@ -8,7 +8,7 @@ function Movies({
   isLoggedIn,
   onMenuClick,
   savedBeatfilms,
-  next,
+  nextDisplayedMovies,
   onMovieLike,
   onLoadMore,
   executeSearchQuery,
@@ -41,7 +41,7 @@ function Movies({
 
         <MoviesCardList
           savedBeatfilms={savedBeatfilms}
-          next={next}
+          nextDisplayedMovies={nextDisplayedMovies}
           onMovieLike={onMovieLike}
           onLoadMoreClick={onLoadMore}
           isPreloader={isPreloader}

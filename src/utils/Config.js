@@ -1,4 +1,5 @@
-export const BASE_URL = "https://api.explorer.nomoredomains.monster";
+// export const BASE_URL = "https://api.explorer.nomoredomains.monster"; // вернуть
+export const BASE_URL = "http://localhost:3001"; // вернуть
 
 export const MOVIES_URL = "https://api.nomoreparties.co/beatfilm-movies";
 
