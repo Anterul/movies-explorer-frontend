@@ -37,7 +37,7 @@ function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(
     localStorage.isLoggedIn ? checkIsLoggedInLocal() : false
   );
-  //
+
   const [currentUser, setCurrentUser] = useState({
     name: "",
     email: "",
@@ -98,7 +98,6 @@ function App() {
   }
 
   // чекбокс с записью в localstorage для компонента Movies и роута /movies
-
   function retutnIsShort() {
     if (JSON.parse(localStorage.getItem("shortState")) === "true") {
       return true;
@@ -122,11 +121,9 @@ function App() {
   }
 
   // прелоадер
-
   const [isMoviesLoading, setIsMoviesLoading] = useState(false);
 
   // функции
-
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -148,7 +145,6 @@ function App() {
         if (data.token) {
           localStorage.setItem("jwt", data.token);
           checkToken();
-          // navigate("/movies", { replace: true });
         }
       })
       .catch((error) => {
@@ -169,7 +165,7 @@ function App() {
     // удяляю savedMovies, которые относятся к /saved-movies
     setSavedMovies([]);
     setFilteredSavedMovies([]);
-    setSavedMoviesSearchQuery([]);
+    setSavedMoviesSearchQuery("");
     setSavedMoviesShortState(false);
     // удаляю currentUser
     setCurrentUser({
@@ -320,7 +316,7 @@ function App() {
     }
   }, [beatfilmsSearchQuery]);
 
-  // сброс нажатия
+  // сброс нажатия кнопки поиска
   useEffect(() => {
     setIsSearchButtonPressed(false);
   }, [beatfilmsSearchQuery, savedMoviesSearchQuery, location.pathname]);
