@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 function SearchForm({
   executeSearchQuery,
@@ -8,11 +9,15 @@ function SearchForm({
   handleSearchButton,
   isSearchButtonDisabled,
 }) {
+  const location = useLocation();
+
   function handleTextChange(e) {
-    localStorage.setItem(
-      "beatfilmsSearchQuery",
-      JSON.stringify(e.target.value)
-    );
+    if (location.pathname === "/movies") {
+      localStorage.setItem(
+        "beatfilmsSearchQuery",
+        JSON.stringify(e.target.value)
+      );
+    }
     setSearchQuery(e.target.value);
   }
 
