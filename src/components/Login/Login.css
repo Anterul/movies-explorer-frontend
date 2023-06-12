@@ -61,7 +61,7 @@
 }
 
 .login__input:hover {
-  outline: 2px solid #ff6838;
+  outline: 2px solid #eee;
   border-radius: 5px;
 }
 
@@ -81,6 +81,7 @@
 }
 
 .login__submit-button {
+  box-sizing: border-box;
   margin: 147px 0 0 0;
   padding: 0;
   width: 260px;
@@ -91,13 +92,23 @@
   color: #ffffff;
   border: none;
   border-radius: 3px;
-  background-color: #ff6838;
+  background-color: rgba(255, 104, 36, 0.9);
   cursor: pointer;
-  transition: opacity 0.3s;
+  transition-property: background-color;
+  transition-duration: 0.4s;
+  transition-timing-function: linear;
+}
+
+.login__submit-button:disabled {
+  background-color: #bbb;
+}
+
+.login__submit-button[disabled]:hover {
+  background-color: #bbb;
 }
 
 .login__submit-button:hover {
-  opacity: 0.85;
+  background-color: rgba(255, 104, 36, 1);
 }
 
 .login__link-text {

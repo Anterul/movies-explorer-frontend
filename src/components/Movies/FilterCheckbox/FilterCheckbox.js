@@ -1,9 +1,6 @@
-import { useState } from "react";
-
-function FilterCheckbox() {
-  const [checked, setChecked] = useState(true);
-  function handleCheck() {
-    setChecked(!checked);
+function FilterCheckbox({ isShort, handleIsShort }) {
+  function handleShort() {
+    handleIsShort();
   }
   return (
     <div className="filter-checkbox">
@@ -11,8 +8,8 @@ function FilterCheckbox() {
       <label className="filter-checkbox__container">
         <input
           className="filter-checkbox__input"
-          checked={checked}
-          onChange={handleCheck}
+          checked={isShort}
+          onChange={handleShort}
           id="short-films"
           type="checkbox"
           name="short-films"
